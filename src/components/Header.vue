@@ -1,5 +1,7 @@
 <script setup lang="ts">
-// import TheWelcome from '../components/TheWelcome.vue'
+defineProps<{
+  msg: string
+}>()
 </script>
 
 <template>
@@ -15,5 +17,8 @@
         <span></span>
         <span></span>
     </div>
-  </header>
+</header>
 </template>
+
+<style scoped>
+</style>
