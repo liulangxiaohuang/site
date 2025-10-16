@@ -152,6 +152,11 @@ nav a:hover {
     width: 50px;
     pointer-events: auto;
     cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+.hero-text-img img:hover, .hero-text-img svg:hover {
+    opacity: 1;
 }
 
 /* Hero Controls */
