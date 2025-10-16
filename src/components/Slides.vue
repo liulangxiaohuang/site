@@ -112,7 +112,7 @@ onUnmounted(() => {
     </div>
 
     <div class="hero-text">
-      <h1>Wild Huang</h1>
+      <h1>Wild Huang Vanlife</h1>
       <p>Photographer & Vlogger</p>
     </div>
 
