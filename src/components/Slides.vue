@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import IconPlayVideo from "@/components/icons/IconPlayVideo.vue"
 
 interface ImageItem {
   id: number
@@ -114,6 +115,10 @@ onUnmounted(() => {
     <div class="hero-text">
       <h1>Wild Huang Vanlife</h1>
       <p>Photographer & Vlogger</p>
+      <p class="hero-text-img">
+<!--        <img src="@/assets/icons/play2.png">-->
+        <IconPlayVideo />
+      </p>
     </div>
 
     <div class="hero-arrows">

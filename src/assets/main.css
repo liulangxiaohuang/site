@@ -148,6 +148,12 @@ nav a:hover {
     opacity: 0.9;
 }
 
+.hero-text-img img, .hero-text-img svg {
+    width: 50px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
 /* Hero Controls */
 .hero-controls {
     position: absolute;
