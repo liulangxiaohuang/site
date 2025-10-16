@@ -1,19 +1,13 @@
 <script setup lang="ts">
-// import TheWelcome from '../components/TheWelcome.vue'
+import Header from '@/components/Header.vue'
+import Slides from '@/components/Slides.vue'
+import Projects from '@/components/Projects.vue'
+import Contact from '@/components/Contact.vue'
 </script>
 
 <template>
-  <header>
-    <div class="brand">Wild Huang</div>
-    <nav>
-        <a href="#projects">Projects</a>
-        <a href="#information">Information</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <div class="menu-icon">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-  </header>
+  <Header />
+  <Slides />
+  <Projects />
+  <Contact />
 </template>
