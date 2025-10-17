@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import IconPlayVideo from "@/components/icons/IconPlayVideo.vue"
+import VideoPlayer from './VideoPlayer.vue'
+import poster from '@/assets/imgs/22.jpg'
 
 interface ImageItem {
   id: number
@@ -92,6 +94,21 @@ const stopAutoplay = (): void => {
   }
 }
 
+const videoPlayerRef = ref<InstanceType<typeof VideoPlayer> | null>(null)
+
+const handlePlay = () => {
+  videoPlayerRef.value?.show({
+    src: 'https://video.sonystyle.com.cn/customerTrans/5c3f07699e9c757a4d576bb240fa61e0/44ad8b13-18a4151e320-0003-cd2e-0e7-91d59.mp4',
+    poster: poster
+  })
+  stopAutoplay()
+}
+
+const handleVideoClose = () => {
+  console.log('视频播放器关闭')
+  startAutoplay()
+}
+
 // 生命周期
 onMounted(() => {
   initCarousel()
@@ -113,11 +130,10 @@ onUnmounted(() => {
     </div>
 
     <div class="hero-text">
-      <h1>Wild Huang Vanlife</h1>
+      <h1>WILD HUANG VANLIFE</h1>
       <p>Photographer & Vlogger</p>
       <p class="hero-text-img">
-<!--        <img src="@/assets/icons/play2.png">-->
-        <IconPlayVideo />
+        <IconPlayVideo @click="handlePlay" />
       </p>
     </div>
 
@@ -125,6 +141,11 @@ onUnmounted(() => {
       <button class="arrow-btn prev" @click="prevSlide">‹</button>
       <button class="arrow-btn next" @click="nextSlide">›</button>
     </div>
+
+    <VideoPlayer
+      ref="videoPlayerRef"
+      @close="handleVideoClose"
+    />
   </div>
 </template>
 

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import IconEmail from './icons/IconEmail.vue'
+import IconWechat from './icons/IconWechat.vue'
 </script>
 
 <template>
@@ -7,7 +9,7 @@
       <div class="footer-section">
         <h3>Get In Touch</h3>
         <p>户外｜旅行｜汽车｜慢生活 | 露营博主｜汽车博主｜旅行博主</p>
-        <p>喜欢自然原生态生活，探索更多的生活方式，主打车内舒适生活，氛围感营造，以及真实的vanlife体验者，讲述一个普通汽车旅行者的不普通的故事。</p>
+        <p>喜欢自然原生态生活，探索更多的生活方式，主打车内舒适生活，氛围感营造，以真实的vanlife体验者，讲述一个普通汽车旅行者的故事。</p>
         <p>目前有两台玩具车：</p>
         <p>🚕 北斗星·小黄·主打姿态<br />🚐 全 顺·小灰·主打舒适</p>
         <div class="line"></div>
@@ -17,13 +19,21 @@
         <p>Currently, I have two fun vehicles in my fleet:</p>
         <p>🚕 “Little Yellow” – a SUZUKI, tuned for style and stance <br />🚐 “Little Gray” – a Ford Transit, built for comfort and coziness</p>
         <p></p>
+        <p></p>
       </div>
-      <div class="footer-section" style="display: none;">
+      <div class="footer-section">
         <div class="footer-links">
-          <a href="mailto:immissile@qq.com">Email</a>
-          <a href="#">Instagram</a>
-          <a href="#">Vimeo</a>
-          <a href="#">LinkedIn</a>
+          <p style="margin-top: 8px;">
+            <IconEmail class="icon-email" />
+            <span>immissile@qq.com</span>
+          </p>
+          <p>
+            <IconWechat class="icon-wechat" />
+            <span>liulangxiaohuang</span>
+            <i>请注明来意 / Please indicate your purpose</i>
+          </p>
+          <!-- <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a> -->
         </div>
       </div>
     </div>
@@ -41,4 +51,24 @@
 </template>
 
 <style scoped>
+.icon-email {
+  width: 20px;
+}
+.icon-wechat {
+  width: 26px;
+  margin-left: -3px;
+}
+.footer-links {
+  p {
+    /* margin: 0; */
+    margin-bottom: 10px;
+    > span {
+      display: inline-block;
+      width: 100%;
+    }
+    > i {
+      font-size: 11px;
+    }
+  }
+}
 </style>

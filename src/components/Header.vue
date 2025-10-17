@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { onMounted, onUnmounted, computed } from 'vue'
+
+const route = useRoute()
+const isHome = computed(() => route.path === '/')
 
 // 存储事件处理器的引用，以便清理
 let menuIcon: Element | null = null
@@ -71,11 +75,13 @@ onUnmounted(() => {
 
 <template>
   <header>
-    <div class="brand">Wild Huang</div>
+    <router-link class="brand" to="/">Wild Huang</router-link>
     <nav>
-        <a href="#projects">Projects</a>
-        <a href="#information">Information</a>
-        <a href="#contact">Contact</a>
+        <a href="#projects" v-if="isHome">Projects</a>
+        <router-link to="/" v-else>Home</router-link>
+        <router-link to="/photos">Photos</router-link>
+        <router-link to="/photobook">Book</router-link>
+        <a href="#contact" v-if="isHome">Contact</a>
     </nav>
     <div class="menu-icon">
         <span></span>
@@ -83,6 +89,7 @@ onUnmounted(() => {
         <span></span>
     </div>
 </header>
+<img src="@/assets/coms/banner.png" style="width: 100%;" v-if="!isHome">
 </template>
 
 <style scoped>

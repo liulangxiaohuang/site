@@ -1,23 +1,47 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import LayoutView from '@/layouts/Layout.vue'
+
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    component: LayoutView,
+    children: [
+      {
+        path: '',
+        name: 'Home',
+        // chunk (Photos.[hash].js)
+        // lazy-loaded when the route is visited
+        component: () => import('@/views/HomeView.vue')
+      },
+      {
+        path: 'photos',
+        name: 'Photos',
+        component: () => import('@/views/PhotosView.vue'),
+      },
+      {
+        path: 'photobook',
+        name: 'Photobook',
+        component: () => import('@/views/PhotoBookView.vue'),
+      },
+    ]
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
-    },
-  ],
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { left: 0, top: 0 }
+    }
+  },
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = (to.meta.title as string) || 'Wild Huang'
+  next()
 })
 
 export default router
