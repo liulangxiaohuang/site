@@ -89,7 +89,7 @@ onUnmounted(() => {
         <span></span>
     </div>
 </header>
-<img src="@/assets/coms/banner.png" style="width: 100%;" v-if="!isHome">
+<img src="@/assets/coms/banner.jpg" style="width: 100%;" v-if="!isHome">
 </template>
 
 <style scoped>
