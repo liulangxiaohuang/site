@@ -33,7 +33,7 @@ const loadScript = (src: string): Promise<void> => {
 const resizeBook = () => {
   if (!containerRef.value || !bookRef.value) return
   const containerWidth = containerRef.value.clientWidth
-  const bookWidth = 800
+  const bookWidth = document.body.offsetWidth - 60
   const newScale = containerWidth / bookWidth
   scale.value = newScale > 1 ? 1 : newScale
 
@@ -53,8 +53,8 @@ onMounted(async () => {
       const $book = window.$(bookRef.value)
 
       $book.turn({
-        width: 800,
-        height: 500,
+        // width: '80%',
+        // height: '80%',
         autoCenter: true,
         display: 'double',
         gradients: true,
@@ -85,9 +85,9 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-  if (bookRef.value && window.$) {
-    window.$(bookRef.value).turn('destroy')
-  }
+  // if (bookRef.value && window.$) {
+  //   window.$(bookRef.value).turn('destroy')
+  // }
   window.removeEventListener('resize', resizeBook)
 })
 
@@ -115,6 +115,7 @@ const canGoNext = computed(() => currentPage.value < totalPages.value)
 
 <template>
   <div class="flipbook-container" ref="containerRef">
+
     <div class="flipbook-header">
       <div class="page-indicator">
         <span class="current-page">{{ currentPage }}</span>
@@ -125,36 +126,8 @@ const canGoNext = computed(() => currentPage.value < totalPages.value)
 
     <div class="flipbook-wrapper">
       <div class="flipbook" ref="bookRef">
-        <!-- 使用 slot 渲染页面 -->
         <slot />
       </div>
-
-      <!-- 翻页按钮 -->
-      <transition name="fade">
-        <button
-            v-if="canGoPrev"
-            class="nav-btn left"
-            @click="prevPage"
-            aria-label="上一页"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </transition>
-
-      <transition name="fade">
-        <button
-            v-if="canGoNext"
-            class="nav-btn right"
-            @click="nextPage"
-            aria-label="下一页"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </transition>
     </div>
 
     <div class="flipbook-footer">
@@ -168,7 +141,38 @@ const canGoNext = computed(() => currentPage.value < totalPages.value)
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
           <path d="M9 3H15M3 9L21 9M9 21H15M3 15L21 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <span>拖动页面边缘可以翻页</span>
+        <span>移动设备可拖动页面边缘翻页</span>
+      </div>
+      <div class="nav-btn-container">
+        <transition name="fade">
+          <button
+              :disabled="!canGoPrev"
+              class="nav-btn left"
+              @click="prevPage"
+              aria-label="上一页"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </transition>
+        <div class="nav-btn-sub-ctls">
+          <span @click="goToPage(1)">首页</span>
+          <i>/</i>
+          <span @click="goToPage(totalPages)">尾页</span>
+        </div>
+        <transition name="fade">
+          <button
+              :disabled="!canGoNext"
+              class="nav-btn right"
+              @click="nextPage"
+              aria-label="下一页"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </transition>
       </div>
     </div>
   </div>
@@ -182,33 +186,31 @@ const canGoNext = computed(() => currentPage.value < totalPages.value)
   flex-direction: column;
   align-items: center;
   position: relative;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  //background: linear-gradient(135deg, #e0e0e0 0%, #d1d1d1 100%);
   padding: 40px 20px;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  //box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .flipbook-header {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   z-index: 10;
 }
 
 .page-indicator {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 12px 28px;
-  border-radius: 50px;
-  font-size: 1.1rem;
+  //background: rgba(255, 255, 255, 0.95);
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #667eea;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  //box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .current-page {
-  font-size: 1.5rem;
   color: #764ba2;
 }
 
@@ -228,8 +230,8 @@ const canGoNext = computed(() => currentPage.value < totalPages.value)
 }
 
 .flipbook {
-  width: 800px;
-  height: 500px;
+  //width: 800px;
+  //height: 500px;
   transition: transform 0.3s ease;
   cursor: grab;
 }
@@ -281,8 +283,8 @@ const canGoNext = computed(() => currentPage.value < totalPages.value)
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.95);
   border: none;
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   border-radius: 50%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -291,7 +293,7 @@ const canGoNext = computed(() => currentPage.value < totalPages.value)
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #667eea;
+  color: #939395;
   backdrop-filter: blur(10px);
   z-index: 100;
 }
@@ -315,17 +317,24 @@ const canGoNext = computed(() => currentPage.value < totalPages.value)
   right: -70px;
 }
 
+.nav-btn[disabled] {
+  background: rgb(244 241 241 / 95%);
+  color: #e5e2e2;
+}
+
 .flipbook-footer {
   margin-top: 30px;
   width: 100%;
-  max-width: 800px;
+  //max-width: 800px;
+  max-width: 70%;
+  min-width: 300px;
   z-index: 10;
 }
 
 .progress-bar {
   width: 100%;
   height: 6px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgb(129 129 129 / 20%);
   border-radius: 3px;
   overflow: hidden;
   backdrop-filter: blur(10px);
@@ -346,12 +355,40 @@ const canGoNext = computed(() => currentPage.value < totalPages.value)
   justify-content: center;
   margin-top: 16px;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.7rem;
+  color: #5c5c5c;
+  font-weight: normal;
 }
 
 .tips svg {
   opacity: 0.8;
+}
+
+.nav-btn-container {
+  display: flex;
+  height: 100px;
+  position: relative;
+  margin: 0 auto;
+  max-width: 200px;
+  margin-top: 20px;
+  text-align: center;
+
+  .nav-btn-sub-ctls {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    color: #555;
+
+    span {
+      cursor: pointer;
+      transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      &:hover {
+        color: #222;
+      }
+    }
+  }
 }
 
 /* 过渡动画 */
