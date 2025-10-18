@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import PhotoList from '@/components/PhotoList.vue'
 </script>
 
 <template>
-  <div>
-    <h1>Photos</h1>
+  <div style="margin-top: 30px">
+    <PhotoList />
   </div>
 </template>
 
