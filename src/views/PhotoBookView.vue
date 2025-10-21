@@ -70,13 +70,13 @@ onMounted(() => {
 
 <style scoped>
 .photo-book {
-  height: 100vh;
-  //background: #efefef;
+  height: calc(100vh - 100px);
+  /* //background: #efefef; */
   background: linear-gradient(137deg, #f5f5f5 0%, #d2d2d2 100%);
 
   .page {
     img {
-      //width: 30%;
+      /* //width: 30%; */
     }
   }
 }
