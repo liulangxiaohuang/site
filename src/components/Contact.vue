@@ -40,7 +40,7 @@ import IconWechat from './icons/IconWechat.vue'
     <div class="footer-bottom">
       <span>&copy; 2025 Wild Huang</span>
       <div class="social-links">
-        <a href="https://www.instagram.com/WanderingHuang" target="_blank">Instagram</a>
+        <a href="https://unsplash.com/@wildhuang" target="_blank">Unsplash</a>
         <a href="http://www.youtube.com/@WanderingHuang" target="_blank">Youtube</a>
         <a href="https://xiaohongshu.com/user/profile/63abb24a000000002702850b" target="_blank">小红书</a>
         <a href="https://www.douyin.com/user/MS4wLjABAAAA6037NiNVocmluEJwqrFWVVRs4-ANidJlEKENmKZWGtK2xJJITji3zWOxn78HWJ7n" target="_blank">抖音</a>
