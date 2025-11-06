@@ -124,7 +124,7 @@ onUnmounted(() => {
     <div class="hero-slides">
       <div class="hero-slide active" v-for="(item, index) in imgList" :key="index">
         <img
-          :src="getDocImage(item.id)" :alt="`Image ${index + 1}`"
+          :src="`https://emvwaah4t3bbsgp0.public.blob.vercel-storage.com/imgs/${item.id}.jpg`" :alt="`Image ${index + 1}`"
         />
       </div>
     </div>
