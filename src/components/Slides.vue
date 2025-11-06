@@ -2,7 +2,6 @@
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import IconPlayVideo from "@/components/icons/IconPlayVideo.vue"
 import VideoPlayer from './VideoPlayer.vue'
-import poster from '@/assets/imgs/22.jpg'
 
 interface ImageItem {
   id: number
@@ -98,8 +97,9 @@ const videoPlayerRef = ref<InstanceType<typeof VideoPlayer> | null>(null)
 
 const handlePlay = () => {
   videoPlayerRef.value?.show({
-    src: 'https://video.sonystyle.com.cn/customerTrans/5c3f07699e9c757a4d576bb240fa61e0/44ad8b13-18a4151e320-0003-cd2e-0e7-91d59.mp4',
-    poster: poster
+    // src: 'https://video.sonystyle.com.cn/customerTrans/5c3f07699e9c757a4d576bb240fa61e0/44ad8b13-18a4151e320-0003-cd2e-0e7-91d59.mp4',
+    src: `https://emvwaah4t3bbsgp0.public.blob.vercel-storage.com/videos/vcr.MOV`,
+    poster: 'https://emvwaah4t3bbsgp0.public.blob.vercel-storage.com/imgs/30.jpg'
   })
   stopAutoplay()
 }
