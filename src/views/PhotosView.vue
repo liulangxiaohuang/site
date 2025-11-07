@@ -270,7 +270,8 @@ const generateMockImages = (count: number): ImageItem[] => {
     const height = 200 + Math.floor(Math.random() * 300)
     images.push({
       id: i,
-      url: getDocImage(i),
+      // url: getDocImage(i),
+      url: `https://emvwaah4t3bbsgp0.public.blob.vercel-storage.com/imgs/${i}.jpg`,
       width: 300,
       height: height
     })
